@@ -1,8 +1,8 @@
 const path = require('path')
 
 // 前端url
-// const getUrlIndexHtml = () => `https://sakiko.top/`
-const getUrlIndexHtml = () => `http://127.0.0.1:50403/`
+const getUrlIndexHtml = () => `https://sakiko.top/`
+// const getUrlIndexHtml = () => `http://127.0.0.1:50403/`
 
 const pathPreloadJs = path.join(__dirname, './preload.js')
 
