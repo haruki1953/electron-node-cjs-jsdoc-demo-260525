@@ -184,5 +184,6 @@ const createWindow = () => {
 }
 
 module.exports = {
-  startElectronDesktop
+  startElectronDesktop,
+  checkOnlyOneDesktop
 }
