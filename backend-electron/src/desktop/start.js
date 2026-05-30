@@ -42,8 +42,11 @@ const startElectronDesktop = () => {
   app.whenReady().then(() => {
     // // 绑定icp通信
     // handleIcpMain()
-    // 创建托盘
-    createTray()
+
+    // 【260530】改为不带小托盘，关闭窗口即关闭程序
+    // // 创建托盘
+    // createTray()
+
     // 创建窗口
     createWindow()
     // 部分 API 在 ready 事件触发后才能使用。
@@ -68,27 +71,28 @@ const startElectronDesktop = () => {
 //   ipcMain.handle('httpPortIcp', async () => httpPort)
 // }
 
-const createTray = () => {
-  // 托盘用多尺寸ico会模糊，直接用图片吧
-  const icon = nativeImage.createFromPath(pathIconPng)
-  mainTray = new Tray(icon)
-  const contextMenu = Menu.buildFromTemplate([
-    {
-      label: desktopConfig.trayShowLable,
-      click: mainWindowShowRestoreFocus
-    }, {
-      label: desktopConfig.trayQuitLable,
-      click: quitApp
-    }
-  ])
+// 【260530】改为不带小托盘，关闭窗口即关闭程序
+// const createTray = () => {
+//   // 托盘用多尺寸ico会模糊，直接用图片吧
+//   const icon = nativeImage.createFromPath(pathIconPng)
+//   mainTray = new Tray(icon)
+//   const contextMenu = Menu.buildFromTemplate([
+//     {
+//       label: desktopConfig.trayShowLable,
+//       click: mainWindowShowRestoreFocus
+//     }, {
+//       label: desktopConfig.trayQuitLable,
+//       click: quitApp
+//     }
+//   ])
 
-  mainTray.setContextMenu(contextMenu)
-  mainTray.setToolTip(desktopConfig.trayToolTip)
-  mainTray.setTitle(desktopConfig.trayTitle)
+//   mainTray.setContextMenu(contextMenu)
+//   mainTray.setToolTip(desktopConfig.trayToolTip)
+//   mainTray.setTitle(desktopConfig.trayTitle)
 
-  // 点击托盘图标显示窗口
-  mainTray.on('click', mainWindowShowRestoreFocus)
-}
+//   // 点击托盘图标显示窗口
+//   mainTray.on('click', mainWindowShowRestoreFocus)
+// }
 
 const mainWindowShowRestoreFocus = () => {
   if (isQuitting) {
@@ -165,15 +169,22 @@ const createWindow = () => {
     mainWindow.webContents.openDevTools()
   }
 
-  // 窗口关闭时隐藏窗口
-  mainWindow.on('close', (event) => {
-    if (isQuitting) {
-      // 这个是必要的，不然无法退出
-      return
-    }
-    event.preventDefault()
-    mainWindow?.hide()
-    return true
+  // // 窗口关闭时隐藏窗口
+  // mainWindow.on('close', (event) => {
+  //   if (isQuitting) {
+  //     // 这个是必要的，不然无法退出
+  //     return
+  //   }
+  //   event.preventDefault()
+  //   mainWindow?.hide()
+  //   return true
+  // })
+
+  // 【260530】改为不带小托盘，关闭窗口即关闭程序
+  // 窗口关闭时直接退出
+  mainWindow.on('close', () => {
+    isQuitting = true
+    app.quit()
   })
 
   // 使用系统默认浏览器打开链接

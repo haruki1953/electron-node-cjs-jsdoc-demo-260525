@@ -1,4 +1,6 @@
-const { startElectronDesktop, checkOnlyOneDesktop } = require("./desktop");
+// @ts-ignore
+require('module-alias/register')
+const { startElectronDesktop, checkOnlyOneDesktop } = require("@/desktop");
 
 ;(async () => {
   // 确保只有一个实例在运行

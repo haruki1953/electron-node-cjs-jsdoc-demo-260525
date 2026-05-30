@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "checkJs": true, // ⭐ 让 JS 文件也进行类型检查
+    "allowJs": true, // 允许编译 JS
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true, // ⭐ 开启严格模式（推荐）
+    // 这会导致 type-check 时也警告，不太好所以决定不用，而是改为让eslint来承担这个
+    // "noUnusedLocals": true, // 本地变量没用 → 报警
+    // "noUnusedParameters": true, // 函数参数没用 → 报警
+    "baseUrl": ".", // ⭐ 配合 module-alias
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ] // ⭐ 你的 module-alias 映射
+    },
+    "noEmit": true, // ⭐ 不生成任何文件，只做类型检查
+    "skipLibCheck": true, // 避免库类型冲突报错
+  },
+  "include": [
+    "src/**/*",
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+}

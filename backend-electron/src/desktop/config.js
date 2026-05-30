@@ -1,8 +1,8 @@
 const path = require('path')
 
 // 前端url
-const getUrlIndexHtml = () => `https://sakiko.top/`
-// const getUrlIndexHtml = () => `http://127.0.0.1:50403/`
+// const getUrlIndexHtml = () => `https://sakiko.top/`
+const getUrlIndexHtml = () => `http://127.0.0.1:50403/`
 
 const pathPreloadJs = path.join(__dirname, './preload.js')
 
@@ -10,6 +10,8 @@ const pathPreloadJs = path.join(__dirname, './preload.js')
 const pathIconIco = path.join(__dirname, '../../assets/icon.ico')
 // 托盘用多尺寸ico会模糊，直接用图片吧
 const pathIconPng = path.join(__dirname, '../../assets/icon.png')
+
+const a = ""
 
 const desktopConfig = {
   width: 1280,
