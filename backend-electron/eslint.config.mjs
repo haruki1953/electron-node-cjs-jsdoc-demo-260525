@@ -34,11 +34,15 @@ export default defineConfig([
     files: ['src/**/*.{js,mjs,cjs,ts,mts,cts}'],
   },
   {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
+    files: ['src/**/*.{js,mjs,cjs,ts,mts,cts}'],
     rules: {
-      // 避免Unicorn因commonjs而报错
+      // Unicorn相关完善
+      // 避免unicorn因commonjs而报错
       'unicorn/prefer-module': 'off',
-      // 'unicorn/prefer-node-protocol': 'off',
+      // 避免unicorn不让用null
+      'unicorn/no-null': 'off',
+      // 避免unicorn不让if时反向条件在前
+      'unicorn/no-negated-condition': 'off',
 
       // 允许 Electron 主进程用 CJS 语法
       '@typescript-eslint/no-require-imports': 'off',
