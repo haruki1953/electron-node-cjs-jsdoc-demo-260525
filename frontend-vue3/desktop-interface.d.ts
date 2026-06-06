@@ -1,7 +1,9 @@
 export interface DesktopAPI {
-  node: () => string
-  chrome: () => string
-  electron: () => string
+  process_versions: {
+    node: string;
+    chrome: string;
+    electron: string;
+  }
   // generateTokenAdmin: () => Promise<string>
   // httpPortIcp: () => Promise<number>
 }
@@ -9,8 +11,6 @@ export interface DesktopAPI {
 declare global {
   interface Window {
     // desktopAPI可能为undefined
-    desktopAPI?: {
-      [K in keyof DesktopAPI]: DesktopAPI[K] | undefined
-    }
+    desktopAPI?: DesktopAPI
   }
 }
