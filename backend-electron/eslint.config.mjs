@@ -43,6 +43,9 @@ export default defineConfig([
       'unicorn/no-null': 'off',
       // 避免unicorn不让if时反向条件在前
       'unicorn/no-negated-condition': 'off',
+      // 避免拼写不能缩写强制检擦
+      "unicorn/prevent-abbreviations": "off",
+
 
       // 允许 Electron 主进程用 CJS 语法
       '@typescript-eslint/no-require-imports': 'off',

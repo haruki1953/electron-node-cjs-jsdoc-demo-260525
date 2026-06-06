@@ -1,0 +1,16 @@
+@use './base.css';
+@use './tailwind.css';
+@use './color.scss';
+@use './element-plus.scss';
+
+// 自定义文字被选中时的背景色和文字颜色
+::selection {
+  background: var(--el-color-primary); /* 选中时的背景色 */
+  color: var(--color-text);       /* 选中时的文字颜色 */
+}
+
+// 有长文本显示的元素最好加这个
+.wrap-long-text {
+  overflow-wrap: anywhere;     /* 尽可能在任意点断行，避免水平滚动，但仍优先保持词完整 */
+  white-space: pre-wrap;       /* 保留空格和换行，同时允许自动换行 */
+}

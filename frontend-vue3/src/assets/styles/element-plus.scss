@@ -1,0 +1,152 @@
+@use "sass:color";
+
+@function color-lighten($color, $step) {
+  @return color.mix(#ffffff, $color, $step * 10%);
+}
+
+@function color-darken($color, $step) {
+  @return color.mix(#181818, $color, $step * 10%);
+}
+
+// 配置 element-plus 颜色
+$types: (
+  primary: #7899CC,
+  success: #799978,
+  // info: #345566,
+  info: #5a7583,
+  warning: #BB9854,
+  danger: #AB4378,
+  error: #AB4378
+);
+
+// $light-steps: 3, 5, 7, 8, 9;
+// $dark-steps: 2;
+
+$light-steps: 1, 2, 3, 4, 5, 6, 7, 8, 9;
+$dark-steps: 1, 2, 3, 4, 5, 6, 7, 8, 9;
+
+:root:root {
+  @each $type, $color in $types {
+    --el-color-#{$type}: #{$color};
+
+    @each $step in $light-steps {
+      --el-color-#{$type}-light-#{$step}: #{color-lighten($color, $step)};
+    }
+
+    @each $step in $dark-steps {
+      --el-color-#{$type}-dark-#{$step}: #{color-darken($color, $step)};
+    }
+  }
+}
+
+:root:root.dark {
+  @each $type, $color in $types {
+    --el-color-#{$type}: #{$color};
+
+    @each $step in $light-steps {
+      --el-color-#{$type}-light-#{$step}: #{color-darken($color, $step)};
+    }
+
+    @each $step in $dark-steps {
+      --el-color-#{$type}-dark-#{$step}: #{color-lighten($color, $step)};
+    }
+  }
+}
+
+// 生成的css变量如
+/*
+--el-color-primary
+--el-color-primary-light-1
+--el-color-primary-dark-1
+...
+--el-color-success
+...
+--el-color-info
+...
+--el-color-warning
+...
+--el-color-danger
+...
+--el-color-error
+...
+*/
+
+.el-button.el-button {
+  // 【251210】el版本改变后，发现ForgotPasswordDialog.vue中的“取消”按钮颜色不对，进行修正
+  --el-fill-color-blank: vat(--color-background)
+}
+
+.el-message.el-message {
+  border-radius: 20px;
+  transition:
+    box-shadow .5s,
+    border .5s,
+    background-color .5s,
+    opacity var(--el-transition-duration),
+    transform .4s,
+    top .4s;
+  // box-shadow: var(--el-box-shadow-light);
+  box-shadow: 0 0 6px 6px var(--color-background);
+  --el-message-bg-color: var(--color-background-soft);
+  --el-message-border-color: transparent;
+
+  .el-message__badge {
+    .el-badge__content {
+      // transition: border 0.5s;
+      border: none;
+    }
+  }
+}
+
+.el-notification.el-notification {
+  border-radius: 20px;
+  border: none;
+  background-color: var(--color-background-soft);
+  box-shadow: 0 0 6px 6px var(--color-background);
+
+  .el-notification__content {
+    overflow-wrap: anywhere;
+    /* 尽可能在任意点断行，避免水平滚动，但仍优先保持词完整 */
+    white-space: pre-wrap;
+    /* 保留空格和换行，同时允许自动换行 */
+  }
+}
+
+.el-notification.right {
+  // width: var(--el-notification-width);
+  transition:
+    box-shadow .5s,
+    border .5s,
+    background-color .5s,
+    opacity var(--el-transition-duration),
+    transform var(--el-transition-duration),
+    left var(--el-transition-duration),
+    // right var(--el-transition-duration),
+    top .4s,
+    bottom var(--el-transition-duration);
+
+  @media (max-width: 360px) {
+    width: 280px;
+  }
+}
+
+.el-scrollbar.el-scrollbar {
+  .el-scrollbar__bar {
+    z-index: 10;
+    pointer-events: none; // bar 不可点击
+
+    .el-scrollbar__thumb {
+      pointer-events: auto; // thumb 可点击
+    }
+  }
+
+  // 屏幕宽度小于或等于 500 时
+  @media (max-width: 500px) {
+    .el-scrollbar__bar.is-vertical {
+      width: 4.5px;
+    }
+    .el-scrollbar__bar.is-horizontal {
+      height: 4.5px;
+    }
+  }
+}

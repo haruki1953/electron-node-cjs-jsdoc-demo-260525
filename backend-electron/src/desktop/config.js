@@ -2,7 +2,8 @@ const path = require('node:path')
 
 // 前端url
 // const getUrlIndexHtml = () => `https://sakiko.top/`
-const getUrlIndexHtml = () => 'http://127.0.0.1:50403/'
+// const getUrlIndexHtml = () => 'http://127.0.0.1:50403/'
+const getUrlIndexHtml = () => 'http://localhost:55173/'
 
 const pathPreloadJs = path.join(__dirname, './preload.js')
 
@@ -26,8 +27,8 @@ const desktopConfig = {
 }
 
 // 是否打开开发工具
-// const enableDevTools = true
-const enableDevelopmentTools = false
+const enableDevTools = true
+// const enableDevTools = false
 
 module.exports = {
   getUrlIndexHtml,
@@ -35,5 +36,5 @@ module.exports = {
   pathIconIco,
   pathIconPng,
   desktopConfig,
-  enableDevTools: enableDevelopmentTools,
+  enableDevTools,
 }
