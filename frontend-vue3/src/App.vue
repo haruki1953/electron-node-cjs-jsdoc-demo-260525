@@ -5,6 +5,7 @@ import {
   desktopChromeVersion,
   desktopElectronVersion,
   desktopIsDeskTop,
+  desktopConfigFileContent,
 } from './desktop'
 
 useDark()
@@ -13,6 +14,7 @@ console.log('desktopNodeVersion', desktopNodeVersion)
 console.log('desktopChromeVersion', desktopChromeVersion)
 console.log('desktopElectronVersion', desktopElectronVersion)
 console.log('desktopIsDeskTop', desktopIsDeskTop)
+console.log('desktopConfigFileContent', desktopConfigFileContent)
 
 </script>
 

@@ -45,6 +45,7 @@ export default defineConfig([
       'unicorn/no-negated-condition': 'off',
       // 避免拼写不能缩写强制检擦
       "unicorn/prevent-abbreviations": "off",
+      "unicorn/prefer-node-protocol": "off",
 
 
       // 允许 Electron 主进程用 CJS 语法
@@ -118,6 +119,26 @@ export default defineConfig([
       // ],
       // // 禁止对类型不安全的值访问成员
       // '@typescript-eslint/no-unsafe-member-access': 'error',
+
+      indent: [
+        "error",
+        2,
+        {
+          SwitchCase: 1,        // switch 内缩进
+          VariableDeclarator: 1, // 多变量声明缩进
+          outerIIFEBody: 1,
+          MemberExpression: 1,
+          FunctionDeclaration: { body: 1, parameters: 1 },
+          FunctionExpression: { body: 1, parameters: 1 },
+          CallExpression: { arguments: 1 },
+          ArrayExpression: 1,
+          ObjectExpression: 1,
+          ImportDeclaration: 1,
+          flatTernaryExpressions: false,
+          offsetTernaryExpressions: true,
+          ignoreComments: false
+        }
+      ]
 
     }
   }

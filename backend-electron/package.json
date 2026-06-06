@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "1.0.1",
-    "module-alias": "2.2.3"
+    "module-alias": "2.2.3",
+    "zod": "3.25.76"
   },
   "devDependencies": {
     "@electron-forge/cli": "7.6.0",

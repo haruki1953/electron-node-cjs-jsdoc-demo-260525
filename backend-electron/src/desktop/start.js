@@ -143,7 +143,21 @@ const createWindow = () => {
     // 窗口图标使用多尺寸ico最好
     icon: pathIconIco,
     webPreferences: {
-      preload: pathPreloadJs
+      preload: pathPreloadJs,
+
+      // ⚠️ 必须显式关闭 sandbox，否则 preload 会在沙盒环境运行，
+      //    无法使用 Node.js API（require、fs、path 等全部不可用）。
+      sandbox: false,
+  
+      // ✔ 保持 contextIsolation=true（官方安全要求）
+      //    让 preload 与渲染进程隔离，防止前端页面直接访问 Node 环境。
+      //    不影响 preload 使用 Node，只是保证安全。
+      contextIsolation: true,
+
+      // ✔ 必须保持 nodeIntegration=false（安全）
+      //    禁止渲染进程使用 require（避免前端页面获得 Node 权限）。
+      //    preload 的 Node 能力不受此影响，只由 sandbox/Fuses 决定。
+      nodeIntegration: false,
     }
   })
   if (windowInfo.shouldMaximize) {

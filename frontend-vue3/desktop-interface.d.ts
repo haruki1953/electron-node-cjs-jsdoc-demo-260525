@@ -4,6 +4,10 @@ export interface DesktopAPI {
     chrome: string;
     electron: string;
   }
+  configFileContent: {
+    aaaaaa: string;
+    bbbbbb: string;
+  } | null
   // generateTokenAdmin: () => Promise<string>
   // httpPortIcp: () => Promise<number>
 }

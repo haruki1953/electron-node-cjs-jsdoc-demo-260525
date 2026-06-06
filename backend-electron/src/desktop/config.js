@@ -1,4 +1,4 @@
-const path = require('node:path')
+const path = require('path')
 
 // 前端url
 // const getUrlIndexHtml = () => `https://sakiko.top/`

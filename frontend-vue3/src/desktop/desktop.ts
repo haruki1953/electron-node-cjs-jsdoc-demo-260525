@@ -8,3 +8,5 @@ export const desktopIsDeskTop = (() => {
   }
   return true
 })()
+
+export const desktopConfigFileContent = window.desktopAPI?.configFileContent
