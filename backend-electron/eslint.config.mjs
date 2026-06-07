@@ -101,7 +101,7 @@ export default defineConfig([
       'no-inner-declarations': ['error', 'functions'],
 
       // 空行控制
-      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1 }],
+      'no-multiple-empty-lines': ['warn', { max: 1, maxEOF: 1 }],
 
       // // 避免非布尔值被 if 或 ! 语句使用
       // // 'no-implicit-coercion': ['error', { boolean: false }], （好像不生效）
@@ -120,25 +120,49 @@ export default defineConfig([
       // // 禁止对类型不安全的值访问成员
       // '@typescript-eslint/no-unsafe-member-access': 'error',
 
+      // 缩进规则：强制使用 2 空格，并对各种语法结构做细粒度控制
       indent: [
-        "error",
-        2,
+        "warn",
+        2, // 使用两个空格作为缩进
         {
-          SwitchCase: 1,        // switch 内缩进
-          VariableDeclarator: 1, // 多变量声明缩进
-          outerIIFEBody: 1,
-          MemberExpression: 1,
-          FunctionDeclaration: { body: 1, parameters: 1 },
-          FunctionExpression: { body: 1, parameters: 1 },
-          CallExpression: { arguments: 1 },
-          ArrayExpression: 1,
-          ObjectExpression: 1,
-          ImportDeclaration: 1,
-          flatTernaryExpressions: false,
-          offsetTernaryExpressions: true,
-          ignoreComments: false
+          SwitchCase: 1,              // switch 的 case 缩进一级
+          VariableDeclarator: 1,      // 多变量声明时，变量对齐缩进一级
+          outerIIFEBody: 1,           // IIFE（立即执行函数）内部缩进一级
+          MemberExpression: 1,        // 对象链式调用（a.b.c）换行时缩进一级
+          FunctionDeclaration: {      // 函数声明的缩进规则
+            body: 1,                  // 函数体缩进一级
+            parameters: 1             // 多行参数缩进一级
+          },
+          FunctionExpression: {       // 函数表达式的缩进规则
+            body: 1,
+            parameters: 1
+          },
+          CallExpression: {           // 函数调用的参数缩进
+            arguments: 1              // 多行参数缩进一级
+          },
+          ArrayExpression: 1,         // 多行数组缩进一级
+          ObjectExpression: 1,        // 多行对象缩进一级
+          ImportDeclaration: 1,       // 多行 import 缩进一级
+          flatTernaryExpressions: false, // 三元表达式保持正常缩进，不扁平化
+          offsetTernaryExpressions: true, // 多行三元表达式缩进更自然
+          ignoreComments: false       // 注释也参与缩进检查
+        }
+      ],
+
+      // 最大行宽：限制每行最多 100 字符（不自动修复，只提示）
+      "max-len": [
+        "warn",
+        {
+          code: 100, // 每行最多 100 字符
+          ignoreComments: true,          // 忽略注释行
+          ignoreStrings: true,           // 忽略字符串导致的超长
+          ignoreTemplateLiterals: true,  // 忽略模板字符串导致的超长
+          ignoreRegExpLiterals: true,    // 忽略正则字面量
+          ignoreUrls: true,              // 忽略 URL
+          ignorePattern: ""              // 用正则忽略匹配的行
         }
       ]
+
 
     }
   }

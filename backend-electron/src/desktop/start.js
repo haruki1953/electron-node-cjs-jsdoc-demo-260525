@@ -1,6 +1,8 @@
 // Modules to control application life and create native browser window
 const { Tray, BrowserWindow, app, nativeImage, Menu, shell, screen } = require('electron')
-const { desktopConfig, getUrlIndexHtml, pathIconIco, pathIconPng, pathPreloadJs, enableDevTools } = require('./config')
+const { 
+  desktopConfig, getUrlIndexHtml, pathPreloadJs, enableDevTools, pathIconIco 
+} = require('./config')
 
 // // 强制启用 GPU
 // app.commandLine.appendSwitch('ignore-gpu-blocklist')
@@ -73,8 +75,7 @@ const startElectronDesktop = () => {
 
 // 【260530】改为不带小托盘，关闭窗口即关闭程序
 // const createTray = () => {
-//   // 托盘用多尺寸ico会模糊，直接用图片吧
-//   const icon = nativeImage.createFromPath(pathIconPng)
+//   const icon = nativeImage.createFromPath(pathIconIco)
 //   mainTray = new Tray(icon)
 //   const contextMenu = Menu.buildFromTemplate([
 //     {
@@ -140,7 +141,6 @@ const createWindow = () => {
     minWidth: desktopConfig.minWidth,
     minHeight: desktopConfig.minHeight,
     show: false, // 初始隐藏窗口
-    // 窗口图标使用多尺寸ico最好
     icon: pathIconIco,
     webPreferences: {
       preload: pathPreloadJs,
@@ -148,7 +148,7 @@ const createWindow = () => {
       // ⚠️ 必须显式关闭 sandbox，否则 preload 会在沙盒环境运行，
       //    无法使用 Node.js API（require、fs、path 等全部不可用）。
       sandbox: false,
-  
+
       // ✔ 保持 contextIsolation=true（官方安全要求）
       //    让 preload 与渲染进程隔离，防止前端页面直接访问 Node 环境。
       //    不影响 preload 使用 Node，只是保证安全。
